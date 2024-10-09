@@ -1,16 +1,10 @@
 /**
-*Programme simulant la version du jeu de Nim de truc
-*@author L.Carré, B.Thomas
+* Jeu de Nim (variate Marienbad)
+* @author Lucien Carré, Thomas Brami Coatual
 */
 class Multiplayer {
-    void principal() {
-        int[][] tab = tableJeu();
-        affichageJeu(tab);
-    }    
-    
-    
     /**
-    * méthode permettant de créer la table de jeu
+    * Méthode permettant de créer la table de jeu
     * @return res un tableau représentant des batons
     */
     int[][] tableJeu() {
@@ -30,8 +24,7 @@ class Multiplayer {
         }
         return res;
     }
-    
-    
+
     /**
     * méthode permettant d'afficher la table de jeu
     * @param t la table de jeu
@@ -46,5 +39,10 @@ class Multiplayer {
             }
             System.out.println();
         }
+    }
+
+    void principal() {
+        int[][] tab = tableJeu();
+        affichageJeu(tab);
     }
 }
