@@ -33,7 +33,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	}
 
 	void principal() {
-		int nombre_de_colones = 4;
+		int nombre_de_colones = 3;
 		int[] tableau_somme = new int[3]; // nombre de puissances de deux
 
 		for (int i = 1; i < 2*nombre_de_colones; i+=2) {
