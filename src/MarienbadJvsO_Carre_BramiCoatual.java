@@ -74,12 +74,9 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	}
 
 	void mancheOrdinateur(int[] tab, int nbits) {
-		int removed = -1;
-		int ligne_ou_on_a_retire = -1;
+		int nombre_a_retirer = 1;
+		int ligne_ou_on_a_retire = 0;
 		boolean aJoue = false;
-
-		System.out.print("tab: "); displayTab(tab);
-		System.out.println("TOUR DE L'ORDINATEUR");
 
 		int[] tableau_somme = new int[nbits]; // nombre de bits réquis pour coder x lignes
 
@@ -88,44 +85,51 @@ class MarienbadJvsO_Carre_BramiCoatual {
 		System.out.print("tableau_somme: "); displayTab(tableau_somme);
 
 		if (joueurActuelPeutGagner(tableau_somme)) { // si l'ordi peut gagner
-			System.out.println("on peut gagner on va bien jouer");
-
 			// on a pas trouvé mieux que de bruteforce un coup gagnant
 
 			boolean coupEstGagnant = false;
-			int index_ligne = 0;
-			int index_nombre = 1;
-
-			while (!coupEstGagnant) {
-
-				int[] solution_potentielle = new int[tab.length];
-				int[] somme_tab_solution = new int[nbits];
+			while (!coupEstGagnant && ligne_ou_on_a_retire < tab.length) {
 
 				// on crée une copie du tableau du jeu pour ne pas l'affecter dans notre recherche de solution
+				int[] tab_copie = new int[tab.length];
 				for (int i = 0; i < tab.length; i++) {
-					solution_potentielle[i] = tab[i];
+					tab_copie[i] = tab[i];
 				}
 
-
-				// modifier oslution potentielle pour tester
-				if (solution_potentielle[index_ligne] >= 0) {
-					index_ligne++;
+				// Vérifiez si on peut retirer des bâtons de la ligne actuelle
+				if (nombre_a_retirer > tab_copie[ligne_ou_on_a_retire]) {
+					ligne_ou_on_a_retire++;
+					nombre_a_retirer = 1;
+					if (ligne_ou_on_a_retire >= tab_copie.length) {
+						break; // Plus de lignes à tester
+					}
 				}
 
-				solution_potentielle[index_ligne] -= index_nombre;
+				System.out.println("ligne_ou_on_a_retire: " + ligne_ou_on_a_retire);
+				System.out.println("nombre_a_retirer: " + nombre_a_retirer);
 
-				tableauJeuVersTableauSommeBinaire(solution_potentielle, somme_tab_solution);
+				// si on tombe sur une ligne vide, on cherche à modifier la suivante
+				tab_copie[ligne_ou_on_a_retire] -= nombre_a_retirer;
 
-				if (joueurActuelPeutGagner(somme_tab_solution)) {
+
+				// on crée un tableau binaire de la somme des lignes du tableau de jeu
+				int[] somme_tab_solution = new int[nbits];
+				tableauJeuVersTableauSommeBinaire(tab_copie, somme_tab_solution);
+				System.out.print("somme_tab_solution: "); displayTab(somme_tab_solution);
+
+				if (!joueurActuelPeutGagner(somme_tab_solution)) {
+					System.out.print("Solution gagnante trouvée! "); System.out.print("somme_tab_solution: "); displayTab(somme_tab_solution); System.out.println();
+
+					// on met à jour le tableau de jeu avec la solution trouvée
+					for (int i = 0; i < tab.length; i++) {
+						tab[i] = tab_copie[i];
+					}
+
+
 					coupEstGagnant = true;
-
-					System.out.print("solution_potentielle: "); displayTab(solution_potentielle); System.out.println();
-
-					System.out.print("somme_tab_solution: "); displayTab(somme_tab_solution); System.out.println();
-
-				} else {
-					index_nombre++;
 				}
+
+				nombre_a_retirer++;
 			}
 
 
@@ -135,9 +139,9 @@ class MarienbadJvsO_Carre_BramiCoatual {
 			// on retire un nombre aléatoire de baton sur la première ligne sur laquelle il y en a encore
 			for (int i = tab.length - 1; i >= 0 && !aJoue; i--) {
 				if (tab[i] != 0) {
-					removed = (int) ((Math.random() * tab[i]) + 1);
+					nombre_a_retirer = (int) ((Math.random() * tab[i]) + 1);
 
-					tab[i] -= removed;
+					tab[i] -= nombre_a_retirer;
 					ligne_ou_on_a_retire = i;
 
 					aJoue = true;
@@ -145,7 +149,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 			}
 		}
 
-		System.out.println("L'ordinateur a retiré " + removed + " batons sur la ligne " + ligne_ou_on_a_retire);
+		System.out.println("L'ordinateur a retiré " + nombre_a_retirer + " batons sur la ligne " + ligne_ou_on_a_retire);
 	}
 
 
