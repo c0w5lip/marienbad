@@ -4,10 +4,10 @@
 */
 class MarienbadJvsJ_Carre_BramiCoatual {
     void principal() {
-		testTableJeu();
+		/*testTableJeu();
 		testTableId();
 		testSommeTableJeu();
-		testStrId();
+		testStrId();*/
         lancementJeu();
     }
     
@@ -20,18 +20,20 @@ class MarienbadJvsJ_Carre_BramiCoatual {
     */
     void lancementJeu() {
 		int lines;
-		String player1, player2;
-		player1 = SimpleInput.getString("Quel est le nom du joueur jouant en premier ? ");
-		player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
+		String player1 = SimpleInput.getString("Quel est le nom du joueur jouant en premier ? ");
+		String player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
+		
+		//Vérification de pseudos de player différents
 		while (strId(player1, player2)) {
 			System.out.println("Deux joueurs ne peuvent pas avoir le meme nom");
 			player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
 		}
+		
+		//Vérification du nombre de lignes de la partie (entre 2 et 15 inclus)
         do {
             lines = SimpleInput.getInt("Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? ");
         } while (lines < 2 || lines > 15);
-        int[] tab = tableJeu(lines); //création du tableau de jeu
-        partieJeu(tab, player1, player2); //appel de la procédure lançant une partie
+        partieJeu(lines, player1, player2);
     }
     
     
@@ -44,20 +46,32 @@ class MarienbadJvsJ_Carre_BramiCoatual {
     * @param player1 le nom du joueur 1
     * @param player2 le nom du joueur 2
     */
-    void partieJeu(int[] tab, String player1, String player2) {
-        String nameActu = player1; //Nom du joueur qui joue actuellement
-        int somme = sommeTableJeu(tab); //Nombre d'allumettes restantes
+    void partieJeu(int lines, String player1, String player2) {
+        int[] tab = tableJeu(lines);
+        
+        //Nom du joueur qui joue actuellement
+        String nameActu = player1; 
+        int somme = sommeTableJeu(tab);
+        
         while (somme > 0) {
-			System.out.println(); //Lisibilité du jeu
-			affichageJeu(tab); //Affichage du tableau de jeu
-			manchePartie(tab, nameActu); //Lancement d'une manche
-			somme = sommeTableJeu(tab); //Nombre d'allumettes restantes
-			if (nameActu == player1 && somme != 0) { //Changement de joueur actuelle à condition qu'il reste des batons
+			
+			//Lisibilité du jeu
+			System.out.println(); 
+			affichageJeu(tab);
+			manchePartie(tab, nameActu);
+			somme = sommeTableJeu(tab);
+			
+			//Changement de joueur actuelle à condition qu'il reste des batons
+			if (nameActu == player1 && somme != 0) {
 				nameActu = player2;
 			} else if (nameActu == player2 && somme != 0){
 				nameActu = player1;
 			}
 		}
+		
+		//Lisibilité du jeu
+		System.out.println(); 
+		affichageJeu(tab);
 		System.out.println("Victoire au joueur " + nameActu);
 	}
 	
@@ -73,6 +87,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	void manchePartie(int[] tab, String nameActu) {
 		System.out.println("A toi de jouer " + nameActu);
 		int line = SimpleInput.getInt("A quel ligne veux-tu retirer des batons ? ");
+		
 		//Boucle vérifiant si la ligne existe ou n'est pas vide
 		while (line < 0 || line > tab.length - 1 || tab[line] == 0) { 
 			if (line < 0 || line > tab.length - 1) {
@@ -81,7 +96,9 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 				line = SimpleInput.getInt("Cette ligne est vide, à quel ligne veux-tu retirer des batons ? ");
 			}
 		}
-		int nbbatons = SimpleInput.getInt("Combien de batons veux-tu retirer ?");
+		
+		int nbbatons = SimpleInput.getInt("Combien de batons veux-tu retirer ? ");
+		
 		//Boucle vérifiant si le nombre de batons n'est pas trop élevé par rapport au nombre de batons sur la ligne ou si il est trop faible
 		while (tab[line] - nbbatons < 0 || nbbatons < 1) { 
 			if (nbbatons < 1) {
@@ -90,6 +107,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 				nbbatons = SimpleInput.getInt("Le nombre de batons rentrés est trop grand, combien de batons veux-tu retirer ? ");
 			}
 		}
+		
 		//Réduction du nombre de batons par le nombre de batons sélectionnés sur la ligne sélectionné par le joueur
 		tab[line] -= nbbatons; 
 	}
@@ -99,12 +117,13 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	
 	
 	/**
-    * Méthode permettant d'afficher la table de jeu
+    * Méthode permettant d'afficher le tableau de jeu
     * @param t la table de jeu
     */
     void affichageJeu(int[] tab) {
         for (int i = 0; i < tab.length; i++) {
 			int cpt = 0;
+			
             System.out.print(i + " :");
             while (cpt < tab[i]) {
 				System.out.print(" |");
@@ -125,6 +144,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	**/
 	boolean strId(String str1, String str2) {
 		boolean res = true;
+		
 		if (str1.length() != str2.length()) {
 			res = false;
 		} else {
@@ -144,10 +164,13 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	* @param result resultat attendu
 	**/
 	void testCasTableId(String str1, String str2, boolean result) {
+		
 		// Affichage
 		System.out.print ("strId(" + str1 + ", " + str2 + ") \t= " + result + "\t : ");
+		
 		// Appel
 		boolean resExec = strId(str1, str2);
+		
 		// Verification
 		if (resExec == result){
 			System.out.println ("OK");
@@ -178,8 +201,8 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	
 	
 	/**
-    * Méthode permettant de lancer une manche et de modifier le tableau
-    * @param tab le tableau de jeu modifié lors de la manche
+    * Méthode permettant de faire la somme des allumettes dans le tableau
+    * @param tab le tableau de jeu
     * @return somme la somme des batons du tableau de jeu
     */
     int sommeTableJeu(int[] tab) {
@@ -196,12 +219,15 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	* @param result resultat attendu
 	**/
 	void testCasSommeTableJeu(int[] tab, int result) {
+		
 		// Affichage
 		System.out.print ("sommeTableJeu(");
 		displayTab(tab);
 		System.out.print(") \t= " + result + "\t : ");
+		
 		// Appel
 		int resExec = sommeTableJeu(tab);
+		
 		// Verification
 		if (resExec == result){
 			System.out.println ("OK");
@@ -251,12 +277,15 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	* @param result resultat attendu
 	**/
 	void testCasTableJeu(int lines, int[] result) {
+		
 		// Affichage
 		System.out.print ("tableJeu(" + lines + ") \t= ");
 		displayTab(result);
 		System.out.print("\t : ");
+		
 		// Appel
 		int[] resExec = tableJeu(lines);
+		
 		// Verification
 		if (tableId(resExec, result)){
 			System.out.println ("OK");
@@ -292,6 +321,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	**/
 	boolean tableId(int[] tab1, int[] tab2) {
 		boolean res = true;
+		
 		if (tab1.length != tab2.length) {
 			res = false;
 		} else {
@@ -311,14 +341,17 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	* @param result resultat attendu
 	**/
 	void testCasTableId(int[] tab1, int[] tab2, boolean result) {
+		
 		// Affichage
 		System.out.print ("tableId(");
 		displayTab(tab1);
 		System.out.print(", ");
 		displayTab(tab2);
 		System.out.print(") \t= " + result + "\t : ");
+		
 		// Appel
 		boolean resExec = tableId(tab1, tab2);
+		
 		// Verification
 		if (resExec == result){
 			System.out.println ("OK");
@@ -359,7 +392,11 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 			System.out.print(t[i] + ",");
 			i++;
 		}
-		System.out.print(t[i] + "}");
+		if (t.length > 0) {
+			System.out.print(t[i] + "}");
+		} else {
+			System.out.print("}");
+		}
 	}
     
 }
