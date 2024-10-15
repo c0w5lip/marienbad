@@ -20,7 +20,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 		} while (lines < 2 || lines > 15);
 
 
-		int nbits = (int) (Math.log(lines*2-1)/Math.log(2)) + 1;
+		int nbits = (int) (Math.log(lines*2-1)/Math.log(2)) + 1; // on cherche n tel que 2**n >= 2*lines-1
 
 
 		int[] tab = tableJeu(lines); //création du tableau de jeu
@@ -134,16 +134,14 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 
 		} else {
-			System.out.println("on va jouer au hasard");
+			// on retire un nombre aléatoire de baton sur une ligne aléatoire
 
-			// on retire un nombre aléatoire de baton sur la première ligne sur laquelle il y en a encore
-			for (int i = tab.length - 1; i >= 0 && !aJoue; i--) {
-				if (tab[i] != 0) {
+			while (!aJoue) {
+				int i = (int) (Math.random() * tab.length);
+				if (tab[i] > 0) {
 					nombre_a_retirer = (int) ((Math.random() * tab[i]) + 1);
-
 					tab[i] -= nombre_a_retirer;
 					ligne_ou_on_a_retire = i;
-
 					aJoue = true;
 				}
 			}
