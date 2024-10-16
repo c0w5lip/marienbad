@@ -62,7 +62,6 @@ class MarienbadJvsJ_Carre_BramiCoatual {
     
     /**
     * Procédure permettant de lancer la partie
-    * @param tab le tableau de jeu
     * @param player1 le nom du joueur 1
     * @param player2 le nom du joueur 2
     */
@@ -160,7 +159,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 	
 	/**
     * Méthode permettant d'afficher le tableau de jeu
-    * @param t la table de jeu
+    * @param tab la table de jeu
     */
     void affichageJeu(int[] tab) {
         for (int i = 0; i < tab.length; i++) {
