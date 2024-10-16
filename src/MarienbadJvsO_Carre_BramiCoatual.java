@@ -345,7 +345,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 	/**
 	 * Méthode permettant d'afficher la table de jeu
-	 * @param t la table de jeu
+	 * @param tab la table de jeu
 	 */
 	void affichageJeu(int[] tab) {
 		for (int i = 0; i < tab.length; i++) {
@@ -523,7 +523,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * Procédure permettant de tester la méthode tableJeu()
 	 */
 	void testTableJeu() {
-		System.out.println ();
+		System.out.println();
 		System.out.println ("*** testTableJeu()");
 
 		int[] res1 = {1,3};
@@ -543,6 +543,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * Méthode permettant de tester si deux tableaux sont identiques
 	 * @param tab1 un tableau
 	 * @param tab2 un tableau
+	 * @return res: true si les tableaux sont identiques sinon false
 	 **/
 	boolean tableId(int[] tab1, int[] tab2) {
 		boolean res = true;
