@@ -8,7 +8,8 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 		testTableId();
 		testSommeTableJeu();
 		testStrId();*/
-        lancementJeu();
+		
+		lancementJeu();
     }
     
     
@@ -19,21 +20,43 @@ class MarienbadJvsJ_Carre_BramiCoatual {
     * Procédure permettant de lancer le début du jeu
     */
     void lancementJeu() {
-		int lines;
-		String player1 = SimpleInput.getString("Quel est le nom du joueur jouant en premier ? ");
-		String player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
+		int rejoue = 1;
+		int cptGame = 0;
+		String player1;
+		String player2;
 		
-		//Vérification de pseudos de player différents
-		while (strId(player1, player2)) {
-			System.out.println("Deux joueurs ne peuvent pas avoir le meme nom");
+		while (rejoue == 1) {
+			cptGame++;
+			
+			System.out.println("Nouvelle partie");
+			System.out.println("Les règles du jeu sont simple :");
+			System.out.println("On prend n'importe quels nombres de batons sur une ligne");
+			System.out.println("On gagne quand on prend le ou les derniers batons sur la table");
+			System.out.println();
+			
+			//Permet de régler le problème de nom demande du player1
+			if (cptGame > 1) {
+				SimpleInput.getString("");
+			}
+			player1 = SimpleInput.getString("Quel est le nom du premier joueur ? ");
 			player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
+			
+			//Vérification de pseudos de player différents
+			while (strId(player1, player2)) {
+				System.out.println("Deux joueurs ne peuvent pas avoir le meme nom");
+				player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
+			}
+			
+			System.out.println("Bienvenue " + player1 + " et " + player2 + " !");
+			
+			//Lancement de la partie
+			partieJeu(player1, player2);
+			
+			//Demande de relance de partie
+			do {
+				rejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0)");
+			} while (rejoue != 1 && rejoue != 0);
 		}
-		
-		//Vérification du nombre de lignes de la partie (entre 2 et 15 inclus)
-        do {
-            lines = SimpleInput.getInt("Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? ");
-        } while (lines < 2 || lines > 15);
-        partieJeu(lines, player1, player2);
     }
     
     
@@ -46,14 +69,34 @@ class MarienbadJvsJ_Carre_BramiCoatual {
     * @param player1 le nom du joueur 1
     * @param player2 le nom du joueur 2
     */
-    void partieJeu(int lines, String player1, String player2) {
-        int[] tab = tableJeu(lines);
-        
-        //Nom du joueur qui joue actuellement
-        String nameActu = player1; 
-        int somme = sommeTableJeu(tab);
-        
-        while (somme > 0) {
+    void partieJeu(String player1, String player2) {
+		String nameActu = player1;
+		int somme = 1;
+		int joueEnPremier = 0;
+		int lines;
+		
+		//Demande qui joue en premier
+		do {
+			joueEnPremier = SimpleInput.getInt("Qui joue en premier ? " + player1 + " (1) ou " + player2 + " (2)");
+		} while (joueEnPremier != 1 && joueEnPremier != 2);
+		
+		//Vérification du nombre de lignes de la partie (entre 2 et 15 inclus)
+		do {
+			lines = SimpleInput.getInt("Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? ");
+		} while (lines < 2 || lines > 15);
+		int[] tab = tableJeu(lines);
+		somme = sommeTableJeu(tab);
+		
+		//Nom du joueur qui joue actuellement
+		if (joueEnPremier == 2) {
+			nameActu = player2;
+			System.out.println(player2 + " joue en premier");
+		} else {
+			System.out.println(player1 + " joue en premier");
+		}
+		
+		//Tant qu'il reste des allumettes
+		while (somme > 0) {
 			
 			//Lisibilité du jeu
 			System.out.println(); 
@@ -72,7 +115,8 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 		//Lisibilité du jeu
 		System.out.println(); 
 		affichageJeu(tab);
-		System.out.println("Victoire au joueur " + nameActu);
+		System.out.println("Victoire du joueur " + nameActu);
+		System.out.println();
 	}
 	
 	

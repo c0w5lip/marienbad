@@ -7,24 +7,50 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * Procédure permettant de lancer le début du jeu
 	 */
 	void lancementJeu() {
+		int rejoue = 1;
+		int cptGame = 0;
 		int lines;
 		String player_name;
-		System.out.println(); //Lisibilité du jeu
-		player_name = SimpleInput.getString("Quel est votre nom ? ");
-		System.out.println(); //Lisibilité du jeu
-		System.out.println("Bienvenue " + player_name + " !");
-		System.out.println("Vous jouez en premier, soyez prêt !");
+		int nbits = 0;
+		
+		while (rejoue == 1) {
+			cptGame++;
+			
+			System.out.println("Nouvelle partie");
+			System.out.println("Les règles du jeu sont simple :");
+			System.out.println("On prend n'importe quels nombres de batons sur une ligne");
+			System.out.println("On gagne quand on prend le ou les derniers batons sur la table");
+			System.out.println();
+			
+			//Permet de régler le problème de nom demande du player1
+			if (cptGame > 1) {
+				SimpleInput.getString("");
+			}
+			
+			//Permet de demander le nom du joueur
+			player_name = SimpleInput.getString("Quel est votre nom ? ");
+			System.out.println(); //Lisibilité du jeu
+			System.out.println("Bienvenue " + player_name + " !");
+			
+			//Vérification du nombre de lignes de la partie (entre 2 et 15 inclus)
+			do {
+				lines = SimpleInput.getInt("Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? ");
+			} while (lines < 2 || lines > 15);
+			
+			//On cherche n tel que 2**n >= 2*lines-1
+			nbits = (int) (Math.log(lines*2-1)/Math.log(2)) + 1; 
 
-		do {
-			lines = SimpleInput.getInt("Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? ");
-		} while (lines < 2 || lines > 15);
-
-
-		int nbits = (int) (Math.log(lines*2-1)/Math.log(2)) + 1; // on cherche n tel que 2**n >= 2*lines-1
-
-
-		int[] tab = tableJeu(lines); //création du tableau de jeu
-		partieJeu(tab, player_name, nbits); //appel de la procédure lançant une partie
+			//Création du tableau de jeu
+			int[] tab = tableJeu(lines); 			
+			
+			//Lancement de la partie
+			partieJeu(tab, player_name, nbits);
+			
+			//Demande de relance de partie
+			do {
+				rejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0)");
+			} while (rejoue != 1 && rejoue != 0);	
+		}			
 	}
 
 
@@ -34,37 +60,78 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	/**
 	 * Procédure permettant de lancer la partie
 	 * @param tab le tableau de jeu
-	 * @param player_name le nom du joueur 1
+	 * @param player_name le nom du joueur
+	 * @param nbits nombre de bits utilisé pour coder le plus grand nombre d'allumettes
 	 */
 	void partieJeu(int[] tab, String player_name, int nbits) {
-		int somme = sommeTableJeu(tab); //Nombre d'allumettes restantes
+		
+		//Nombre d'allumettes restantes
+		int somme = sommeTableJeu(tab); 
+		
+		boolean joueurJoue = true;
+		int joueEnPremier = 1;
+		int nivPC = 2;
 
-		boolean joueurJoue = true; // c'est toujours le joeur qui commence à jouer
+		//Demande qui joue en premier
+		do {
+			joueEnPremier = SimpleInput.getInt("Qui joue en premier ? " + player_name + " (1) ou l'ordinateur (2)");
+		} while (joueEnPremier != 1 && joueEnPremier != 2);
+		
+		//Nom du joueur qui joue actuellement
+		if (joueEnPremier == 2) {
+			joueurJoue = false;
+			System.out.println("L'ordinateur joue en premier");
+		} else {
+			System.out.println("Vous jouez en premier");
+		}
+		
+		//Demande la difficulté de l'ordinateur
+		do {
+			nivPC = SimpleInput.getInt("Quel ordinateur voulez-vous utiliser ? Aléatoire (1) ou Intelligent (2)");
+		} while (joueEnPremier != 1 && joueEnPremier != 2);
+		
+		//Tant qu'il reste des allumettes on joue
 		while (somme > 0) {
-			System.out.println(); //Lisibilité du jeu
-
-
-			affichageJeu(tab); //Affichage du tableau de jeu
+			System.out.println();
+			affichageJeu(tab);
 
 			if (joueurJoue) {
-				manchePartie(tab, player_name); //Lancement d'une manche
+				manchePartie(tab, player_name);
 			} else {
-				mancheOrdinateur(tab, nbits);
+				if (nivPC == 1) {
+					mancheOrdinateurAleatoire(tab);
+				} else {
+					mancheOrdinateurIntelligent(tab, nbits);
+				}
 			}
-
-			somme = sommeTableJeu(tab); //Nombre d'allumettes restantes
-
-
-			joueurJoue = !joueurJoue; //on inverse le tour (joueur, puis ordi, puis joueur, etc.)
+			
+			//Nombre d'allumettes restantes
+			somme = sommeTableJeu(tab); 
+			
+			//On inverse le tour (joueur, puis ordi, puis joueur, etc.)
+			joueurJoue = !joueurJoue; 
 		}
-
+		
+		//Affichage du tableau de jeu final
+		System.out.println(); 
+		affichageJeu(tab);
+		
 		if (!joueurJoue) {
 			System.out.println("Bravo " + player_name + " tu as gagné !");
 		} else {
 			System.out.println("Dommage " + player_name + " tu as perdu !");
 		}
 	}
-
+	
+	
+	
+	
+	
+	/**
+	 * Procédure permettant de créer un tableau de somme des binaires de tableau de jeu
+	 * @param tableau_jeu le tableau de jeu
+	 * @param tableau_somme le tableau au quel on met la somme des binaires
+	 */
 	void tableauJeuVersTableauSommeBinaire(int[] tableau_jeu, int[] tableau_somme) {
 		for (int i = 0; i < tableau_jeu.length; i++) {
 			for (int j = 0; j < tableau_somme.length; j++) {
@@ -72,13 +139,98 @@ class MarienbadJvsO_Carre_BramiCoatual {
 			}
 		}
 	}
+	
+	/**
+	 * Procédure permettant de tester un appel de tableauJeuVersTableauSommeBinaire()
+	 * @param tableau_jeu tableau du jeu
+	 * @param tableau_somme tableau de la somme des binaire des valeurs de tableau_jeu
+	 * @param result resultat attendu
+	 **/
+	void testCasTableauJeuVersTableauSommeBinaire(int[] tableau_jeu, int[] tableau_somme, int[] result) {
+		
+		// Affichage
+		System.out.print ("tableauJeuVersTableauSommeBinaire(");
+		displayTab(tableau_jeu);
+		System.out.print(", ");
+		displayTab(tableau_somme);
+		System.out.print(") \t= ");
+		displayTab(result);
+		System.out.print("\t : ");
+		
+		// Appel
+		tableauJeuVersTableauSommeBinaire(tableau_jeu, tableau_somme);
+		boolean resExec = tableId(tableau_somme, result);
+		
+		// Verification
+		if (resExec){
+			System.out.println ("OK");
+		} else {
+			System.err.println ("ERREUR");
+		}
+	}
 
-	void mancheOrdinateur(int[] tab, int nbits) {
+	/**
+	 * Procédure permettant de tester la méthode tableauJeuVersTableauSommeBinaire()
+	 */
+	void testTableauJeuVersTableauSommeBinaire() {
+		System.out.println ();
+		System.out.println ("*** TableauJeuVersTableauSommeBinaire()");
+
+		int[] tab1 = {3,5,6};
+		int[] tab2 = {1,4,2,9};
+		int[] tab3 = {1,2};
+		int[] tabSomme1 = new int[3];
+		int[] tabSomme2 = new int[4];
+		int[] tabSomme3 = new int[2];
+		int[] tabResult1 = {2,2,2};
+		int[] tabResult2 = {1,1,1,2};
+		int[] tabResult3 = {1,1};
+
+		testCasTableauJeuVersTableauSommeBinaire(tab1, tabSomme1, tabResult1);
+		testCasTableauJeuVersTableauSommeBinaire(tab2, tabSomme2, tabResult2);
+		testCasTableauJeuVersTableauSommeBinaire(tab3, tabSomme3, tabResult3);
+	}
+	
+	
+	
+	
+	
+	/**
+	 * Procédure permettant de lancer une manche de l'ordinateur aléatoire
+	 * @param tab le tableau de jeu qu'on modifie
+	 */
+	void mancheOrdinateurAleatoire(int[] tab) {
+		int nombre_a_retirer = 1;
+		int ligne_ou_on_a_retire = 0;
+		boolean aJoue = false;
+		
+		while (!aJoue) {
+			int i = (int) (Math.random() * tab.length);
+			if (tab[i] > 0) {
+				nombre_a_retirer = (int) ((Math.random() * tab[i]) + 1);
+				tab[i] -= nombre_a_retirer;
+				ligne_ou_on_a_retire = i;
+				aJoue = true;
+			}
+		}
+		System.out.println("L'ordinateur a retiré " + nombre_a_retirer + " batons sur la ligne " + ligne_ou_on_a_retire);
+	}
+	
+	
+	
+	
+	
+	/**
+	 * Procédure permettant de lancer une manche de l'ordinateur intelligent
+	 * @param tab le tableau de jeu qu'on modifie
+	 * @param nbits nombre de bits utilisé pour coder le plus grand nombre d'allumettes
+	 */
+	void mancheOrdinateurIntelligent(int[] tab, int nbits) {
 		int nombre_a_retirer = 1;
 		int ligne_ou_on_a_retire = 0;
 		boolean aJoue = false;
 
-		int[] tableau_somme = new int[nbits]; // nombre de bits réquis pour coder x lignes
+		int[] tableau_somme = new int[nbits]; // nombre de bits requis pour coder x lignes
 
 		tableauJeuVersTableauSommeBinaire(tab, tableau_somme);
 
@@ -151,6 +303,9 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	}
 
 
+
+
+
 	/**
 	 * Procédure permettant de lancer une manche et de modifier le tableau
 	 * @param tab le tableau de jeu modifié lors de la manche
@@ -159,6 +314,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	void manchePartie(int[] tab, String nameActu) {
 		System.out.println("A toi de jouer " + nameActu);
 		int line = SimpleInput.getInt("A quel ligne veux-tu retirer des batons ? ");
+		
 		//Boucle vérifiant si la ligne existe ou n'est pas vide
 		while (line < 0 || line > tab.length - 1 || tab[line] == 0) {
 			if (line < 0 || line > tab.length - 1) {
@@ -167,7 +323,9 @@ class MarienbadJvsO_Carre_BramiCoatual {
 				line = SimpleInput.getInt("Cette ligne est vide, à quel ligne veux-tu retirer des batons ? ");
 			}
 		}
+		
 		int nbbatons = SimpleInput.getInt("Combien de batons veux-tu retirer ?");
+		
 		//Boucle vérifiant si le nombre de batons n'est pas trop élevé par rapport au nombre de batons sur la ligne ou si il est trop faible
 		while (tab[line] - nbbatons < 0 || nbbatons < 1) {
 			if (nbbatons < 1) {
@@ -176,6 +334,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 				nbbatons = SimpleInput.getInt("Le nombre de batons rentrés est trop grand, combien de batons veux-tu retirer ? ");
 			}
 		}
+		
 		//Réduction du nombre de batons par le nombre de batons sélectionnés sur la ligne sélectionné par le joueur
 		tab[line] -= nbbatons;
 	}
@@ -230,10 +389,13 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * @param result resultat attendu
 	 **/
 	void testCasTableId(String str1, String str2, boolean result) {
+		
 		// Affichage
 		System.out.print ("strId(" + str1 + ", " + str2 + ") \t= " + result + "\t : ");
+		
 		// Appel
 		boolean resExec = strId(str1, str2);
+		
 		// Verification
 		if (resExec == result){
 			System.out.println ("OK");
@@ -282,12 +444,15 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * @param result resultat attendu
 	 **/
 	void testCasSommeTableJeu(int[] tab, int result) {
+		
 		// Affichage
 		System.out.print ("sommeTableJeu(");
 		displayTab(tab);
 		System.out.print(") \t= " + result + "\t : ");
+		
 		// Appel
 		int resExec = sommeTableJeu(tab);
+		
 		// Verification
 		if (resExec == result){
 			System.out.println ("OK");
@@ -337,12 +502,15 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * @param result resultat attendu
 	 **/
 	void testCasTableJeu(int lines, int[] result) {
+		
 		// Affichage
 		System.out.print ("tableJeu(" + lines + ") \t= ");
 		displayTab(result);
 		System.out.print("\t : ");
+		
 		// Appel
 		int[] resExec = tableJeu(lines);
+		
 		// Verification
 		if (tableId(resExec, result)){
 			System.out.println ("OK");
@@ -452,13 +620,11 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 
 
-
-
-
-
-
-
-	// true si le joueur dont c'est le tour peut gagner
+	/**
+	 * Méthode permettant de savoir si le joueur actuelle peut gagner
+	 * @param somme tableau avec la somme des binaires du tableau de jeu
+	 * @return resultat boolean true si il peut gagner sinon false
+	 */
 	boolean joueurActuelPeutGagner(int[] somme) {
 		boolean resultat = false;
 
@@ -470,12 +636,58 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 		return resultat;
 	}
+	
+	/**
+	 * Procédure permettant de tester un appel de joueurActuelPeutGagner()
+	 * @param somme un tableau de somme binaire
+	 * @param result resultat attendu
+	 **/
+	void testCasJoueurActuelPeutGagner(int[] somme, boolean result) {
+		
+		// Affichage
+		System.out.print ("joueurActuelPeutGagner(");
+		displayTab(somme);
+		System.out.print(") \t= " + result + "\t : ");
+		
+		// Appel
+		boolean resExec = joueurActuelPeutGagner(somme);
+		
+		// Verification
+		if (resExec == result){
+			System.out.println ("OK");
+		} else {
+			System.err.println ("ERREUR");
+		}
+	}
+
+	/**
+	 * Procédure permettant de tester la méthode joueurActuelPeutGagner()
+	 */
+	void testJoueurActuelPeutGagner() {
+		System.out.println ();
+		System.out.println ("*** testJoueurActuelPeutGagner()");
+
+		int[] tab1 = {1,3,4,2};
+		int[] tab2 = {1,2,0};
+		int[] tab3 = {4,2};
+		int[] tab4 = {2,4,0};
+
+		testCasJoueurActuelPeutGagner(tab1, true);
+		testCasJoueurActuelPeutGagner(tab2, true);
+		testCasJoueurActuelPeutGagner(tab3, false);
+		testCasJoueurActuelPeutGagner(tab4, false);
+	}
 
 
-	/*
-	**
-	* @param number
-	*/
+
+
+
+	/**
+	 * Méthode permettant de coder un nombre en binaire dans un tableau
+	 * @param number nombre à convertir
+	 * @param nbits nombre de bits utilisé pour coder le plus grand nombre d'allumettes
+	 * @return result tableau binaire du nombre
+	 */
 	int[] decimalVersTableauBinaire(int number, int nbits) {
 		int[] puissances_de_deux = new int[nbits];
 		for (int i = 0; i < nbits; i++) {
@@ -496,12 +708,61 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 		return result;
 	}
+	
+	/**
+	 * Procédure permettant de tester un appel de decimalVersTableauBinaire()
+	 * @param number nombre à convertir
+	 * @param nbits nombre de bits utilisé pour coder le plus grand nombre d'allumettes
+	 * @param result resultat attendu
+	 **/
+	void testCasDecimalVersTableauBinaire(int number, int nbits, int[] result) {
+		
+		// Affichage
+		System.out.print ("decimalVersTableauBinaire(" + number + ", " + nbits + ") \t= ");
+		displayTab(result);
+		System.out.print("\t : ");
+		
+		// Appel
+		int[] resExec = decimalVersTableauBinaire(number, nbits);
+		
+		// Verification
+		if (tableId(resExec, result)){
+			System.out.println ("OK");
+		} else {
+			System.err.println ("ERREUR");
+		}
+	}
+
+	/**
+	 * Procédure permettant de tester la méthode decimalVersTableauBinaire()
+	 */
+	void testDecimalVersTableauBinaire() {
+		System.out.println ();
+		System.out.println ("*** testJoueurActuelPeutGagner()");
+
+		int[] tab1 = {1,1,0,0,0};
+		int[] tab2 = {1,1,0,0};
+		int[] tab3 = {1,0,0,1};
+		int[] tab4 = {1,1};
+
+		testCasDecimalVersTableauBinaire(24, 5, tab1);
+		testCasDecimalVersTableauBinaire(12, 4, tab2);
+		testCasDecimalVersTableauBinaire(9, 4, tab3);
+		testCasDecimalVersTableauBinaire(3, 2, tab4);
+	}
+	
+	
+	
+	
 
 	void principal() {
 		testTableJeu();
 		testTableId();
 		testSommeTableJeu();
 		testStrId();
-		lancementJeu();
+		testJoueurActuelPeutGagner();
+		testDecimalVersTableauBinaire();
+		testTableauJeuVersTableauSommeBinaire();
+		//lancementJeu();
 	}
 }
