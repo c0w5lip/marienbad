@@ -1,0 +1,438 @@
+Nouvelle partie
+
+Les règles du jeu sont simple :
+On prend n'importe quels nombres de batons sur une ligne
+On gagne quand on prend le ou les derniers batons sur la table
+
+Quel est le nom du premier joueur ? Aryouko
+Quel est le nom du deuxième joueur ? Kayo
+
+Bienvenue Aryouko et Kayo !
+
+Qui joue en premier ? Aryouko (1) ou Kayo (2) 1
+Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? 1
+Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? -15
+Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? 16
+Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? 11
+Aryouko jouera en premier
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | | | | | | |
+6 :  | | | | | | | | | | | | |
+7 :  | | | | | | | | | | | | | | |
+8 :  | | | | | | | | | | | | | | | | |
+9 :  | | | | | | | | | | | | | | | | | | |
+10 : | | | | | | | | | | | | | | | | | | | | |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? -16
+Cette ligne n'existe pas, à quel ligne veux-tu retirer des batons ? 16
+Cette ligne n'existe pas, à quel ligne veux-tu retirer des batons ? 11
+Cette ligne n'existe pas, à quel ligne veux-tu retirer des batons ? 10
+Combien de batons veux-tu retirer ? -6
+Le nombre de batons rentrés est inférieur ou égale à 0, combien de batons veux-tu retirer ? 156
+Le nombre de batons rentrés est trop grand, combien de batons veux-tu retirer ? 20
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | | | | | | |
+6 :  | | | | | | | | | | | | |
+7 :  | | | | | | | | | | | | | | |
+8 :  | | | | | | | | | | | | | | | | |
+9 :  | | | | | | | | | | | | | | | | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 9
+Combien de batons veux-tu retirer ? 15
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | | | | | | |
+6 :  | | | | | | | | | | | | |
+7 :  | | | | | | | | | | | | | | |
+8 :  | | | | | | | | | | | | | | | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 8
+Combien de batons veux-tu retirer ? 14
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | | | | | | |
+6 :  | | | | | | | | | | | | |
+7 :  | | | | | | | | | | | | | | |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 6
+Combien de batons veux-tu retirer ? 2
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | | | | | | |
+6 :  | | | | | | | | | | |
+7 :  | | | | | | | | | | | | | | |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 7
+Combien de batons veux-tu retirer ? 14
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | | | | | | |
+6 :  | | | | | | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 5
+Combien de batons veux-tu retirer ? 5
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | |
+6 :  | | | | | | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 6
+Combien de batons veux-tu retirer ? 5
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | | | |
+6 :  | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 5
+Combien de batons veux-tu retirer ? 2
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+5 :  | | | |
+6 :  | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 4
+Combien de batons veux-tu retirer ? 7
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | |
+5 :  | | | |
+6 :  | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 3
+Combien de batons veux-tu retirer ? 5
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | |
+4 :  | |
+5 :  | | | |
+6 :  | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 2
+Combien de batons veux-tu retirer ? 2
+
+0 :  |
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 :  | | | |
+6 :  | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 0
+Combien de batons veux-tu retirer ? 1
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 :  | | | |
+6 :  | | | | | |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 6
+Combien de batons veux-tu retirer ? 5
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 :  | | | |
+6 :  |
+7 :  |
+8 :  | | |
+9 :  | | | |
+10 : |
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 8
+Combien de batons veux-tu retirer ? 3
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 :  | | | |
+6 :  |
+7 :  |
+8 : 
+9 :  | | | |
+10 : |
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 10
+Combien de batons veux-tu retirer ? 1
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 :  | | | |
+6 :  |
+7 :  |
+8 : 
+9 :  | | | |
+10 :
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 5
+Combien de batons veux-tu retirer ? 4
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 :  | | | |
+10 :
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 9
+Combien de batons veux-tu retirer ? 4
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 :  | |
+4 :  | |
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 3
+Combien de batons veux-tu retirer ? 2
+
+0 : 
+1 :  | | |
+2 :  | | |
+3 : 
+4 :  | |
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 2
+Combien de batons veux-tu retirer ? 2
+
+0 : 
+1 :  | | |
+2 :  |
+3 : 
+4 :  | |
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 4
+Combien de batons veux-tu retirer ? 2
+
+0 : 
+1 :  | | |
+2 :  |
+3 : 
+4 : 
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 1
+Combien de batons veux-tu retirer ? 2
+
+0 : 
+1 :  |
+2 :  |
+3 : 
+4 : 
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 1
+Combien de batons veux-tu retirer ? 1
+
+0 : 
+1 : 
+2 :  |
+3 : 
+4 : 
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 2
+Combien de batons veux-tu retirer ? 1
+
+0 : 
+1 : 
+2 : 
+3 : 
+4 : 
+5 : 
+6 :  |
+7 :  |
+8 : 
+9 : 
+10 :
+
+A toi de jouer Kayo
+A quel ligne veux-tu retirer des batons ? 7
+Combien de batons veux-tu retirer ? 1
+
+0 : 
+1 : 
+2 : 
+3 : 
+4 : 
+5 : 
+6 :  |
+7 : 
+8 : 
+9 : 
+10 :
+
+A toi de jouer Aryouko
+A quel ligne veux-tu retirer des batons ? 6
+Combien de batons veux-tu retirer ? 1
+
+0 : 
+1 : 
+2 : 
+3 : 
+4 : 
+5 : 
+6 : 
+7 : 
+8 : 
+9 : 
+10 :
+Victoire du joueur Aryouko
+
+Voulez-vous rejouer ? Oui (1), non (0) 0
+
