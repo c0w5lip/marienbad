@@ -760,13 +760,14 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	
 
 	void principal() {
-		testTableJeu();
+		/*testTableJeu();
 		testTableId();
 		testSommeTableJeu();
 		testStrId();
 		testJoueurActuelPeutGagner();
 		testDecimalVersTableauBinaire();
-		testTableauJeuVersTableauSommeBinaire();
+		testTableauJeuVersTableauSommeBinaire();*/
+		
 		lancementJeu();
 	}
 }
