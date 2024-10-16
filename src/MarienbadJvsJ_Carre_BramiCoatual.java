@@ -166,7 +166,12 @@ class MarienbadJvsJ_Carre_BramiCoatual {
         for (int i = 0; i < tab.length; i++) {
 			int cpt = 0;
 			
-            System.out.print(i + " :");
+			if (i > 9) {
+				System.out.print(i + " :");
+			} else {
+				System.out.print(i + " : ");
+			}
+			
             while (cpt < tab[i]) {
 				System.out.print(" |");
 				cpt++;

@@ -347,7 +347,13 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	void affichageJeu(int[] tab) {
 		for (int i = 0; i < tab.length; i++) {
 			int cpt = 0;
-			System.out.print(i + " :");
+			
+			if (i > 9) {
+				System.out.print(i + " :");
+			} else {
+				System.out.print(i + " : ");
+			}
+			
 			while (cpt < tab[i]) {
 				System.out.print(" |");
 				cpt++;
