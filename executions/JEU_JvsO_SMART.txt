@@ -1,0 +1,91 @@
+Nouvelle partie
+
+Les règles du jeu sont simple :
+On prend n'importe quels nombres de batons sur une ligne
+On gagne quand on prend le ou les derniers batons sur la table
+
+Quel est votre nom ? Thomas
+
+Bienvenue Thomas !
+
+Sur combien de lignes voulez-vous jouer (entre 2 et 15 lignes) ? 5
+Qui joue en premier ? Thomas (1) ou l'ordinateur (2) 1
+Vous jouerez en premier
+
+Quel ordinateur voulez-vous utiliser ? Aléatoire (1) ou Intelligent (2) 2
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :  | | | | | | | | |
+
+A toi de jouer Thomas
+A quel ligne veux-tu retirer des batons ? 4
+Combien de batons veux-tu retirer ? 9
+
+0 :  |
+1 :  | | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :
+L'ordinateur a retiré 1 batons sur la ligne 1
+
+0 :  |
+1 :  | |
+2 :  | | | | |
+3 :  | | | | | | |
+4 :
+
+A toi de jouer Thomas
+A quel ligne veux-tu retirer des batons ? 2
+Combien de batons veux-tu retirer ? 1
+
+0 :  |
+1 :  | |
+2 :  | | | |
+3 :  | | | | | | |
+4 :
+L'ordinateur a retiré 1 batons sur la ligne 0
+
+0 :
+1 :  | |
+2 :  | | | |
+3 :  | | | | | | |
+4 :
+
+A toi de jouer Thomas
+A quel ligne veux-tu retirer des batons ? 3
+Combien de batons veux-tu retirer ? 5
+
+0 :
+1 :  | |
+2 :  | | | |
+3 :  | |
+4 :
+L'ordinateur a retiré 5 batons sur la ligne 2
+
+0 :
+1 :  | |
+2 :
+3 :  | |
+4 :
+
+A toi de jouer Thomas
+A quel ligne veux-tu retirer des batons ? 1
+Combien de batons veux-tu retirer ? 2
+
+0 :
+1 :
+2 :
+3 :  | |
+4 :
+L'ordinateur a retiré 3 batons sur la ligne 3
+
+0 :
+1 :
+2 :
+3 :
+4 :
+Dommage Thomas tu as perdu !
+Voulez-vous rejouer ? Oui (1), non (0) 0

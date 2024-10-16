@@ -230,7 +230,6 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 		tableauJeuVersTableauSommeBinaire(tab, tableau_somme);
 
-		System.out.print("tableau_somme: "); displayTab(tableau_somme);
 
 		if (joueurActuelPeutGagner(tableau_somme)) { // si l'ordi peut gagner
 			// on a pas trouvé mieux que de bruteforce un coup gagnant
@@ -253,9 +252,6 @@ class MarienbadJvsO_Carre_BramiCoatual {
 					}
 				}
 
-				System.out.println("ligne_ou_on_a_retire: " + ligne_ou_on_a_retire);
-				System.out.println("nombre_a_retirer: " + nombre_a_retirer);
-
 				// si on tombe sur une ligne vide, on cherche à modifier la suivante
 				tab_copie[ligne_ou_on_a_retire] -= nombre_a_retirer;
 
@@ -263,16 +259,14 @@ class MarienbadJvsO_Carre_BramiCoatual {
 				// on crée un tableau binaire de la somme des lignes du tableau de jeu
 				int[] somme_tab_solution = new int[nbits];
 				tableauJeuVersTableauSommeBinaire(tab_copie, somme_tab_solution);
-				System.out.print("somme_tab_solution: "); displayTab(somme_tab_solution);
 
 				if (!joueurActuelPeutGagner(somme_tab_solution)) {
-					System.out.print("Solution gagnante trouvée! "); System.out.print("somme_tab_solution: "); displayTab(somme_tab_solution); System.out.println();
+					// System.out.print("[+] Solution gagnante déterminée avec succes! "); System.out.print("somme_tab_solution: "); displayTab(somme_tab_solution); System.out.println();
 
 					// on met à jour le tableau de jeu avec la solution trouvée
 					for (int i = 0; i < tab.length; i++) {
 						tab[i] = tab_copie[i];
 					}
-
 
 					coupEstGagnant = true;
 				}
