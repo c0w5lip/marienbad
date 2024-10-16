@@ -15,6 +15,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 		while (idRejoue == 1) {
 			
 			System.out.println("Nouvelle partie");
+			System.out.println();
 			System.out.println("Les règles du jeu sont simple :");
 			System.out.println("On prend n'importe quels nombres de batons sur une ligne");
 			System.out.println("On gagne quand on prend le ou les derniers batons sur la table");
@@ -22,8 +23,9 @@ class MarienbadJvsO_Carre_BramiCoatual {
 			
 			//Permet de demander le nom du joueur
 			player_name = SimpleInput.getString("Quel est votre nom ? ");
-			System.out.println(); //Lisibilité du jeu
+			System.out.println();
 			System.out.println("Bienvenue " + player_name + " !");
+			System.out.println();
 			
 			//Vérification du nombre de lignes de la partie (entre 2 et 15 inclus)
 			do {
@@ -41,7 +43,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 			
 			//Demande de relance de partie
 			do {
-				idRejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0)");
+				idRejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0) ");
 			} while (idRejoue != 1 && idRejoue != 0);	
 		}			
 	}
@@ -67,20 +69,21 @@ class MarienbadJvsO_Carre_BramiCoatual {
 
 		//Demande qui joue en premier
 		do {
-			joueEnPremier = SimpleInput.getInt("Qui joue en premier ? " + player_name + " (1) ou l'ordinateur (2)");
+			joueEnPremier = SimpleInput.getInt("Qui joue en premier ? " + player_name + " (1) ou l'ordinateur (2) ");
 		} while (joueEnPremier != 1 && joueEnPremier != 2);
 		
 		//Nom du joueur qui joue actuellement
 		if (joueEnPremier == 2) {
 			joueurJoue = false;
-			System.out.println("L'ordinateur joue en premier");
+			System.out.println("L'ordinateur jouera en premier");
 		} else {
-			System.out.println("Vous jouez en premier");
+			System.out.println("Vous jouerez en premier");
 		}
+		System.out.println();
 		
 		//Demande la difficulté de l'ordinateur
 		do {
-			nivPC = SimpleInput.getInt("Quel ordinateur voulez-vous utiliser ? Aléatoire (1) ou Intelligent (2)");
+			nivPC = SimpleInput.getInt("Quel ordinateur voulez-vous utiliser ? Aléatoire (1) ou Intelligent (2) ");
 		} while (joueEnPremier != 1 && joueEnPremier != 2);
 		
 		//Tant qu'il reste des allumettes on joue
@@ -305,6 +308,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 	 * @param nameActu le nom du joueur qui joue actuellement
 	 */
 	void manchePartie(int[] tab, String nameActu) {
+		System.out.println();
 		System.out.println("A toi de jouer " + nameActu);
 		int line = SimpleInput.getInt("A quel ligne veux-tu retirer des batons ? ");
 		
