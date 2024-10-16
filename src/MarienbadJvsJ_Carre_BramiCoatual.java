@@ -27,6 +27,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 		while (idRejoue == 1) {
 			
 			System.out.println("Nouvelle partie");
+			System.out.println();
 			System.out.println("Les règles du jeu sont simple :");
 			System.out.println("On prend n'importe quels nombres de batons sur une ligne");
 			System.out.println("On gagne quand on prend le ou les derniers batons sur la table");
@@ -41,14 +42,16 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 				player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
 			}
 			
+			System.out.println();
 			System.out.println("Bienvenue " + player1 + " et " + player2 + " !");
+			System.out.println();
 			
 			//Lancement de la partie
 			partieJeu(player1, player2);
 			
 			//Demande de relance de partie
 			do {
-				idRejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0)");
+				idRejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0) ");
 			} while (idRejoue != 1 && idRejoue != 0);
 		}
     }
@@ -71,7 +74,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 		
 		//Demande qui joue en premier
 		do {
-			joueEnPremier = SimpleInput.getInt("Qui joue en premier ? " + player1 + " (1) ou " + player2 + " (2)");
+			joueEnPremier = SimpleInput.getInt("Qui joue en premier ? " + player1 + " (1) ou " + player2 + " (2) ");
 		} while (joueEnPremier != 1 && joueEnPremier != 2);
 		
 		//Vérification du nombre de lignes de la partie (entre 2 et 15 inclus)
@@ -84,9 +87,9 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 		//Nom du joueur qui joue actuellement
 		if (joueEnPremier == 2) {
 			nameActu = player2;
-			System.out.println(player2 + " joue en premier");
+			System.out.println(player2 + " jouera en premier");
 		} else {
-			System.out.println(player1 + " joue en premier");
+			System.out.println(player1 + " jouera en premier");
 		}
 		
 		//Tant qu'il reste des allumettes
@@ -95,6 +98,7 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 			//Lisibilité du jeu
 			System.out.println(); 
 			affichageJeu(tab);
+			System.out.println();
 			manchePartie(tab, nameActu);
 			somme = sommeTableJeu(tab);
 			
