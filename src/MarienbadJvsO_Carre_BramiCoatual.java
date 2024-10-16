@@ -321,7 +321,7 @@ class MarienbadJvsO_Carre_BramiCoatual {
 			}
 		}
 		
-		int nbbatons = SimpleInput.getInt("Combien de batons veux-tu retirer ?");
+		int nbbatons = SimpleInput.getInt("Combien de batons veux-tu retirer ? ");
 		
 		//Boucle vérifiant si le nombre de batons n'est pas trop élevé par rapport au nombre de batons sur la ligne ou si il est trop faible
 		while (tab[line] - nbbatons < 0 || nbbatons < 1) {
