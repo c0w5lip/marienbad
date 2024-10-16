@@ -32,11 +32,11 @@ public class SimpleInput {
     public static String getString(String prompt) {
         String result;
         System.out.print (prompt);
-        //sc.hasNext();
+        sc.hasNext();
         result = sc.nextLine();
-        //while (result.length() == 0){
-        //    result = sc.nextLine();
-        //}
+        while (result.length() == 0){
+            result = sc.nextLine();
+        }
         return result;
     }
 

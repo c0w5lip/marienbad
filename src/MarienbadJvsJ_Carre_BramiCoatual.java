@@ -20,24 +20,18 @@ class MarienbadJvsJ_Carre_BramiCoatual {
     * Procédure permettant de lancer le début du jeu
     */
     void lancementJeu() {
-		int rejoue = 1;
-		int cptGame = 0;
+		int idRejoue = 1;
 		String player1;
 		String player2;
 		
-		while (rejoue == 1) {
-			cptGame++;
+		while (idRejoue == 1) {
 			
 			System.out.println("Nouvelle partie");
 			System.out.println("Les règles du jeu sont simple :");
 			System.out.println("On prend n'importe quels nombres de batons sur une ligne");
 			System.out.println("On gagne quand on prend le ou les derniers batons sur la table");
 			System.out.println();
-			
-			//Permet de régler le problème de nom demande du player1
-			if (cptGame > 1) {
-				SimpleInput.getString("");
-			}
+						
 			player1 = SimpleInput.getString("Quel est le nom du premier joueur ? ");
 			player2 = SimpleInput.getString("Quel est le nom du deuxième joueur ? ");
 			
@@ -54,8 +48,8 @@ class MarienbadJvsJ_Carre_BramiCoatual {
 			
 			//Demande de relance de partie
 			do {
-				rejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0)");
-			} while (rejoue != 1 && rejoue != 0);
+				idRejoue = SimpleInput.getInt("Voulez-vous rejouer ? Oui (1), non (0)");
+			} while (idRejoue != 1 && idRejoue != 0);
 		}
     }
     
